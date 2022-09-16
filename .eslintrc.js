@@ -23,6 +23,8 @@ module.exports = {
     'no-undef': 'off',
     'no-restricted-syntax': 'off',
     'max-len': 'off',
+    'vue/no-unused-vars': 'warn',
+    'no-underscore-dangle': 'off',
     'import/no-extraneous-dependencies': [
       'off',
       {

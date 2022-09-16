@@ -11,7 +11,12 @@
     <el-icon class="image-box__drag-icon">
       <DragIcon />
     </el-icon>
-    <el-image alt="Книга" class="image-box__image" :src="src" fit="contain" />
+    <el-image
+      :alt="props.title"
+      class="image-box__image"
+      :src="src"
+      fit="contain"
+    />
     <el-icon class="image-box__result-icon" v-if="props.isFinish">
       <SuccessIcon v-if="props.isCorrectResult" />
       <ErrorIcon v-else />
@@ -29,6 +34,7 @@ const props = defineProps<{
   isDragging: boolean;
   isFinish: boolean;
   isCorrectResult: boolean;
+  title: string;
 }>();
 
 // eslint-disable-next-line
@@ -43,7 +49,6 @@ const src = require(`../assets/book/book_${props.id || '1'}.png`);
   position: relative;
   box-shadow: 0px 4px 4px rgba(12, 110, 214, 0.16);
   border-radius: 12px;
-  border-left-color: #46b755;
 
   :hover {
     .image-box__drag-icon {

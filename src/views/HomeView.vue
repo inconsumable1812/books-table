@@ -1,31 +1,19 @@
 <template>
   <div class="home">
-    <List></List>
-    <ImageCard
-      :is-correct-result="isCorrectResult"
-      :id="1"
-      :isDragging="isDragging"
-      :isFinish="true"
-    ></ImageCard>
+    <DragTables :isFinish="isFinish"></DragTables>
+    <el-button @click="handler" type="success">Success</el-button>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-import List from '@/components/List.vue';
-import ImageCard from '@/components/ImageCard.vue';
+<script setup lang="ts">
+import DragTables from '@/components/DragTables.vue';
+import { ref } from 'vue';
 
-export default defineComponent({
-  name: 'HomeView',
-  setup() {
-    const isCorrectResult = ref(true);
-    const isDragging = ref(true);
-    return { isCorrectResult, isDragging };
-  },
-  components: {
-    // HelloWorld,
-    List,
-    ImageCard
-  }
-});
+const isFinish = ref(false);
+
+const handler = () => {
+  isFinish.value = !isFinish.value;
+};
 </script>
+
+<style scoped></style>
