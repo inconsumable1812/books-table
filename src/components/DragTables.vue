@@ -39,7 +39,11 @@
             :title="element.title"
           ></ImageCard>
         </template>
+        <template #header>
+          <h3 class="drag-tables__drop-header">Жанры фольклора</h3>
+        </template>
       </draggable>
+
       <draggable
         class="drag-tables__drop-zone"
         :list="notFolkloreList"
@@ -58,6 +62,11 @@
             :isFinish="props.isFinish"
             :title="element.title"
           ></ImageCard>
+        </template>
+        <template #header>
+          <h3 class="drag-tables__drop-header">
+            Не являются жанрами фольклора
+          </h3>
         </template>
       </draggable>
     </div>
@@ -137,6 +146,7 @@ const endHandler = (e: any) => {
 .drag-tables {
   display: flex;
   justify-content: space-between;
+  margin-top: 89px;
 
   &__books {
     width: 50%;
@@ -146,6 +156,10 @@ const endHandler = (e: any) => {
     column-gap: 3.4%;
     row-gap: 12px;
     align-self: flex-start;
+
+    @media (max-width: 1200px) {
+      width: 33.33%;
+    }
   }
 
   &__drop-zones {
@@ -153,12 +167,30 @@ const endHandler = (e: any) => {
     justify-content: center;
     width: 50%;
     column-gap: 3.4%;
+
+    @media (max-width: 1200px) {
+      width: 66.66%;
+    }
   }
 
   &__drop-zone {
     display: flex;
     flex-direction: column;
     row-gap: 12px;
+    position: relative;
+  }
+
+  &__drop-header {
+    width: 100%;
+    max-width: 285px;
+    position: absolute;
+    left: 50%;
+    top: -65px;
+    transform: translateX(-50%);
+
+    @media (max-width: 767px) {
+      font-size: 15px;
+    }
   }
 }
 </style>

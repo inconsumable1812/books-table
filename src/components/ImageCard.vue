@@ -43,12 +43,44 @@ const src = require(`../assets/book/book_${props.id || '1'}.png`);
 
 <style scoped lang="scss">
 .image-box {
-  max-height: 280px;
-  max-width: 285px;
+  $maxWidth: 285px;
+  $maxHeight: 280px;
+
+  width: 100%;
+  height: 100%;
+  max-height: $maxHeight;
+  max-width: $maxWidth;
   border: 2px solid transparent;
   position: relative;
   box-shadow: 0px 4px 4px rgba(12, 110, 214, 0.16);
   border-radius: 12px;
+  cursor: grab;
+
+  @media (max-width: 1200px) {
+    max-height: calc($maxHeight / 1.3);
+    max-width: calc($maxWidth / 1.3);
+  }
+
+  @media (max-width: 768px) {
+    max-height: calc($maxHeight / 1.8);
+    max-width: calc($maxWidth / 1.8);
+  }
+
+  @media (max-width: 520px) {
+    max-height: calc($maxHeight / 2.2);
+    max-width: calc($maxWidth / 2.2);
+  }
+
+  @media (max-width: 425px) {
+    max-height: calc($maxHeight / 2.6);
+    max-width: calc($maxWidth / 2.6);
+    padding: 5px;
+  }
+
+  @media (max-width: 375px) {
+    max-height: calc($maxHeight / 3.1);
+    max-width: calc($maxWidth / 3.1);
+  }
 
   :hover {
     .image-box__drag-icon {
@@ -67,8 +99,36 @@ const src = require(`../assets/book/book_${props.id || '1'}.png`);
   }
 
   &__image {
-    height: 232px;
-    width: 221px;
+    $width: 221px;
+    $height: 232px;
+
+    height: $height;
+    width: $width;
+
+    @media (max-width: 1200px) {
+      height: calc($height / 1.3);
+      width: calc($width / 1.3);
+    }
+
+    @media (max-width: 768px) {
+      height: calc($height / 1.8);
+      width: calc($width / 1.8);
+    }
+
+    @media (max-width: 520px) {
+      height: calc($height / 2.2);
+      width: calc($width / 2.2);
+    }
+
+    @media (max-width: 425px) {
+      height: calc($height / 2.6);
+      width: calc($width / 2.6);
+    }
+
+    @media (max-width: 375px) {
+      height: calc($height / 3.1);
+      width: calc($width / 3.1);
+    }
   }
 
   &__result-icon {

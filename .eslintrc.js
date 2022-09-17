@@ -25,6 +25,7 @@ module.exports = {
     'max-len': 'off',
     'vue/no-unused-vars': 'warn',
     'no-underscore-dangle': 'off',
+    '@typescript-eslint/no-var-requires': 'off',
     'import/no-extraneous-dependencies': [
       'off',
       {
