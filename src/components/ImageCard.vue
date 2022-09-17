@@ -7,6 +7,7 @@
       'image-box_error': props.isFinish && !props.isCorrectResult
     }"
     shadow="never"
+    body-style="padding: 0"
   >
     <el-icon class="image-box__drag-icon">
       <DragIcon />
@@ -55,20 +56,24 @@ const src = require(`../assets/book/book_${props.id || '1'}.png`);
   box-shadow: 0px 4px 4px rgba(12, 110, 214, 0.16);
   border-radius: 12px;
   cursor: grab;
+  padding: 20px;
 
   @media (max-width: 1200px) {
     max-height: calc($maxHeight / 1.3);
     max-width: calc($maxWidth / 1.3);
+    padding: 12px;
   }
 
   @media (max-width: 768px) {
     max-height: calc($maxHeight / 1.8);
     max-width: calc($maxWidth / 1.8);
+    padding: 5px;
   }
 
   @media (max-width: 520px) {
     max-height: calc($maxHeight / 2.2);
     max-width: calc($maxWidth / 2.2);
+    padding: 0;
   }
 
   @media (max-width: 425px) {
@@ -96,6 +101,10 @@ const src = require(`../assets/book/book_${props.id || '1'}.png`);
     color: #b0b2c1;
     width: 20px;
     height: 20px;
+
+    @media (max-width: 520px) {
+      display: none;
+    }
   }
 
   &__image {

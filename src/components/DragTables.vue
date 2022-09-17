@@ -191,6 +191,10 @@ const endHandler = (e: any) => {
     @media (max-width: 767px) {
       font-size: 15px;
     }
+
+    @media (max-width: 375px) {
+      font-size: 14px;
+    }
   }
 }
 </style>
