@@ -73,11 +73,8 @@
       </div>
     </div>
     <div class="drag-tables__check-button-box">
-      <el-button
-        class="drag-tables__check-button"
-        @click="checkHandler"
-        type="success"
-        >Проверить</el-button
+      <custom-button @click="checkHandler" type="button"
+        >Проверить</custom-button
       >
     </div>
   </div>
@@ -87,6 +84,7 @@
 import draggable from 'vuedraggable';
 import ImageCard from '@/components/ImageCard.vue';
 import DropZone from '@/components/DropZone.vue';
+import CustomButton from '@/components/CustomButton.vue';
 import { reactive, ref } from 'vue';
 
 const isFinish = ref(false);
@@ -151,7 +149,7 @@ const endHandler = (e: any) => {
 
 const checkHandler = () => {
   if (bookList.length !== 0) {
-    alert('Расставть все книги');
+    alert('Расставьте все книги');
     return;
   }
 
@@ -225,18 +223,6 @@ const checkHandler = () => {
     @media (max-width: 768px) {
       padding: 30px 35px;
     }
-  }
-
-  &__check-button {
-    background: #8bd74b;
-    font-family: 'Inter', sans-serif;
-    border-radius: 24px;
-    width: 100%;
-    max-width: 191px;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 150%;
-    padding: 18px 0;
   }
 }
 </style>

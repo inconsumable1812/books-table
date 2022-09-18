@@ -1,96 +1,72 @@
 <template>
-  <div class="root">
-    <div class="books">
-      <header class="books__header">
-        <router-link class="books__header-link" to="/">
-          <el-icon class="books__header-icon">
-            <ArrowIcon></ArrowIcon>
-          </el-icon>
-          <span>Назад</span>
-        </router-link>
-      </header>
-      <div class="books__big-button-box">
-        <el-button class="books__big-button" type="success"
-          >В мире книг</el-button
-        >
+  <div class="home">
+    <h1 class="home__header">В мире книг</h1>
+    <el-card class="home__card" shadow="never" body-style="padding:0">
+      <div class="home__card-box">
+        <h2 class="home__card-header">Инструкция:</h2>
+        <p class="home__card-body">
+          Распредели книги, ориентируясь на названия, по соответствующим
+          рубрикам таблицы: «Жанры фольклора», «Не являются жанрами фольклора».
+        </p>
       </div>
-      <DragTables class="books__drag"></DragTables>
-    </div>
-
-    <div class="root__box-image">
-      <el-image alt="кошка" class="root__image" :src="src" fit="contain" />
-    </div>
+    </el-card>
+    <router-link class="home__link" to="/tables">
+      <custom-button type="link">Продолжить</custom-button>
+    </router-link>
   </div>
 </template>
 
 <script setup lang="ts">
-import DragTables from '@/components/DragTables.vue';
-import ArrowIcon from '../components/ArrowIcon.vue';
-
-const src = require('../assets/cat.png');
+import CustomButton from '@/components/CustomButton.vue';
 </script>
 
 <style scoped lang="scss">
-.root {
-  background: #ecf6e9;
-
-  &__box-image {
-    display: flex;
-    justify-content: end;
-  }
-}
-
-.books {
+.home {
   max-width: 1400px;
   margin: 0 auto;
-  background: #fff;
+  padding: 60px 10px 10px;
+  width: fit-content;
 
   &__header {
-    width: 100%;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    box-shadow: 0px 4px 4px rgba(12, 110, 214, 0.16);
-    border-radius: 8px;
-  }
-
-  &__header-icon {
-    width: 36px;
-    height: 36px;
-  }
-
-  &__header-link {
-    display: flex;
-    text-decoration: none;
-    align-items: center;
-    color: #8bd74b;
-    font-size: 18px;
-    line-height: 140%;
-    column-gap: 8px;
-    margin-left: 57px;
-  }
-
-  &__drag {
-    padding: 0 10px;
-  }
-
-  &__big-button-box {
-    margin: 0 40px;
-
-    @media (max-width: 768px) {
-      margin: 0 12px;
-    }
-  }
-
-  &__big-button {
-    width: 100%;
+    font-weight: 700;
     font-size: 40px;
     line-height: 48px;
-    font-family: 'Inter', sans-serif;
-    padding: 40px 0;
-    background: linear-gradient(90deg, #3f8cff 0.06%, #60b9a6 99.94%);
-    border-radius: 24px;
-    box-shadow: 0px 14px 16px rgba(12, 110, 214, 0.25);
+    color: #8bd74b;
+    text-align: left;
+    margin-bottom: 36px;
+  }
+
+  &__card {
+    width: fit-content;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 0px 0px 20px 20px;
+    border-top: 2px solid #8bd74b;
+    margin-bottom: 36px;
+  }
+
+  &__card-box {
+    padding: 22px 36px;
+    text-align: left;
+  }
+
+  &__card-header {
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 30px;
+    color: #183b59;
+    margin-bottom: 12px;
+  }
+
+  &__card-body {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 140%;
+    color: #183b59;
+  }
+
+  &__link {
+    display: flex;
+    text-decoration: none;
   }
 }
 </style>
