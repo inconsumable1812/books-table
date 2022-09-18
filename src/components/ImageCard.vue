@@ -18,10 +18,12 @@
       :src="src"
       fit="contain"
     />
-    <el-icon class="image-box__result-icon" v-if="props.isFinish">
-      <SuccessIcon v-if="props.isCorrectResult" />
-      <ErrorIcon v-else />
-    </el-icon>
+    <transition name="animation">
+      <el-icon class="image-box__result-icon" v-if="props.isFinish">
+        <SuccessIcon v-if="props.isCorrectResult" />
+        <ErrorIcon v-else />
+      </el-icon>
+    </transition>
   </el-card>
 </template>
 
@@ -43,6 +45,18 @@ const src = require(`../assets/book/book_${props.id || '1'}.png`);
 </script>
 
 <style scoped lang="scss">
+.animation {
+  &-enter-active,
+  &-leave-active {
+    transition: opacity 0.5s ease;
+  }
+
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+  }
+}
+
 .image-box {
   $maxWidth: 285px;
   $maxHeight: 280px;
