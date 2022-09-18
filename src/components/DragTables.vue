@@ -1,74 +1,84 @@
 <template>
   <div class="drag-tables">
-    <draggable
-      @start="startHandler"
-      @end="endHandler"
-      :list="bookList"
-      class="drag-tables__books"
-      :group="{ name: 'books', pull: true, put: false }"
-      itemKey="id"
-    >
-      <template #item="{ element }">
-        <ImageCard
-          :isCorrectResult="element.isCorrectResult"
-          :id="element.id"
-          :isDragging="element.isDragging"
-          :isFinish="props.isFinish"
-          :title="element.title"
-        ></ImageCard>
-      </template>
-    </draggable>
-
-    <div class="drag-tables__drop-zones">
+    <div class="drag-tables__tables">
       <draggable
-        class="drag-tables__drop-zone"
-        :list="folkloreList"
-        group="books"
+        @start="startHandler"
+        @end="endHandler"
+        :list="bookList"
+        class="drag-tables__books"
+        :group="{ name: 'books', pull: true, put: false }"
         itemKey="id"
-        @add="addToFolkloreHandler"
-        @remove="removeFromFolkloreHandler"
       >
         <template #item="{ element }">
-          <DropZone v-if="!element.title"></DropZone>
           <ImageCard
-            v-else
-            :isCorrectResult="element.isFolklore"
+            :isCorrectResult="element.isCorrectResult"
             :id="element.id"
             :isDragging="element.isDragging"
-            :isFinish="props.isFinish"
+            :isFinish="isFinish"
             :title="element.title"
           ></ImageCard>
         </template>
-        <template #header>
-          <h3 class="drag-tables__drop-header">Жанры фольклора</h3>
-        </template>
       </draggable>
 
-      <draggable
-        class="drag-tables__drop-zone"
-        :list="notFolkloreList"
-        group="books"
-        itemKey="id"
-        @add="addToNotFolkloreHandler"
-        @remove="removeFromNotFolkloreHandler"
+      <div class="drag-tables__drop-zones">
+        <draggable
+          class="drag-tables__drop-zone"
+          :list="folkloreList"
+          group="books"
+          itemKey="id"
+          @add="addToFolkloreHandler"
+          @remove="removeFromFolkloreHandler"
+        >
+          <template #item="{ element }">
+            <DropZone v-if="!element.title"></DropZone>
+            <ImageCard
+              v-else
+              :isCorrectResult="element.isFolklore"
+              :id="element.id"
+              :isDragging="element.isDragging"
+              :isFinish="isFinish"
+              :title="element.title"
+            ></ImageCard>
+          </template>
+          <template #header>
+            <h3 class="drag-tables__drop-header">Жанры фольклора</h3>
+          </template>
+        </draggable>
+
+        <draggable
+          class="drag-tables__drop-zone"
+          :list="notFolkloreList"
+          group="books"
+          itemKey="id"
+          @add="addToNotFolkloreHandler"
+          @remove="removeFromNotFolkloreHandler"
+        >
+          <template #item="{ element }">
+            <DropZone v-if="!element.title"></DropZone>
+            <ImageCard
+              v-else
+              :isCorrectResult="!element.isFolklore"
+              :id="element.id"
+              :isDragging="element.isDragging"
+              :isFinish="isFinish"
+              :title="element.title"
+            ></ImageCard>
+          </template>
+          <template #header>
+            <h3 class="drag-tables__drop-header">
+              Не являются жанрами фольклора
+            </h3>
+          </template>
+        </draggable>
+      </div>
+    </div>
+    <div class="drag-tables__check-button-box">
+      <el-button
+        class="drag-tables__check-button"
+        @click="checkHandler"
+        type="success"
+        >Проверить</el-button
       >
-        <template #item="{ element }">
-          <DropZone v-if="!element.title"></DropZone>
-          <ImageCard
-            v-else
-            :isCorrectResult="!element.isFolklore"
-            :id="element.id"
-            :isDragging="element.isDragging"
-            :isFinish="props.isFinish"
-            :title="element.title"
-          ></ImageCard>
-        </template>
-        <template #header>
-          <h3 class="drag-tables__drop-header">
-            Не являются жанрами фольклора
-          </h3>
-        </template>
-      </draggable>
     </div>
   </div>
 </template>
@@ -77,11 +87,9 @@
 import draggable from 'vuedraggable';
 import ImageCard from '@/components/ImageCard.vue';
 import DropZone from '@/components/DropZone.vue';
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 
-const props = defineProps<{
-  isFinish: boolean;
-}>();
+const isFinish = ref(false);
 
 const bookList = reactive(
   [
@@ -106,7 +114,7 @@ const folkloreList = reactive(
 );
 const notFolkloreList = reactive(
   new Array(6).fill('').map((el, i) => ({
-    id: i,
+    id: i + 13,
     isNotFolkloreList: true
   }))
 );
@@ -140,13 +148,25 @@ const endHandler = (e: any) => {
   const eventBook = e.item._underlying_vm_;
   eventBook.isDragging = false;
 };
+
+const checkHandler = () => {
+  if (bookList.length !== 0) {
+    alert('Расставть все книги');
+    return;
+  }
+
+  isFinish.value = !isFinish.value;
+};
 </script>
 
 <style scoped lang="scss">
 .drag-tables {
-  display: flex;
-  justify-content: space-between;
   margin-top: 89px;
+
+  &__tables {
+    display: flex;
+    justify-content: space-between;
+  }
 
   &__books {
     width: 50%;
@@ -195,6 +215,28 @@ const endHandler = (e: any) => {
     @media (max-width: 375px) {
       font-size: 14px;
     }
+  }
+
+  &__check-button-box {
+    display: flex;
+    justify-content: start;
+    padding: 30px 57px;
+
+    @media (max-width: 768px) {
+      padding: 30px 35px;
+    }
+  }
+
+  &__check-button {
+    background: #8bd74b;
+    font-family: 'Inter', sans-serif;
+    border-radius: 24px;
+    width: 100%;
+    max-width: 191px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    padding: 18px 0;
   }
 }
 </style>

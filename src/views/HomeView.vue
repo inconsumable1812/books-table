@@ -14,12 +14,7 @@
           >В мире книг</el-button
         >
       </div>
-      <DragTables class="books__drag" :isFinish="isFinish"></DragTables>
-      <div class="books__check-button-box">
-        <el-button class="books__check-button" @click="handler" type="success"
-          >Проверить</el-button
-        >
-      </div>
+      <DragTables class="books__drag"></DragTables>
     </div>
 
     <div class="root__box-image">
@@ -30,14 +25,7 @@
 
 <script setup lang="ts">
 import DragTables from '@/components/DragTables.vue';
-import { ref } from 'vue';
 import ArrowIcon from '../components/ArrowIcon.vue';
-
-const isFinish = ref(false);
-
-const handler = () => {
-  isFinish.value = !isFinish.value;
-};
 
 const src = require('../assets/cat.png');
 </script>
@@ -103,28 +91,6 @@ const src = require('../assets/cat.png');
     background: linear-gradient(90deg, #3f8cff 0.06%, #60b9a6 99.94%);
     border-radius: 24px;
     box-shadow: 0px 14px 16px rgba(12, 110, 214, 0.25);
-  }
-
-  &__check-button-box {
-    display: flex;
-    justify-content: start;
-    padding: 30px 57px;
-
-    @media (max-width: 768px) {
-      padding: 30px 35px;
-    }
-  }
-
-  &__check-button {
-    background: #8bd74b;
-    font-family: 'Inter', sans-serif;
-    border-radius: 24px;
-    width: 100%;
-    max-width: 191px;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 150%;
-    padding: 18px 0;
   }
 }
 </style>
